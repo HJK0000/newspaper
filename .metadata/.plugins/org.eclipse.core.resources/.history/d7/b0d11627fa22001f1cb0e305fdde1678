@@ -1,0 +1,5 @@
+package com.green.newsProject.repository;
+
+public class ReporterRepository {
+
+}

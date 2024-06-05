@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div class="tab-content">
+		<th:block th:include="spend/spendTotal"></th:block>
+		<th:block th:include="spend/spendSalary"></th:block>
+		<th:block th:include="spend/spendUtility"></th:block>
+	</div>
+
+
+
+</body>
+</html>

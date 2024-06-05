@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<h2>메모 저장하기</h2>
+	<input type="text" name="title" placeholder="Input title....">
+	<br>
+	<input type="text" name="content" placeholder="Input content....">
+	<br>
+	<input type="text" name="writer" placeholder="Input writer....">
+	<br>
+	<button onclick="postMemo()">Memo 저장하기</button>
+	<div id="result_save"></div>
+
+	<hr>
+	<h2>메모 조회하기</h2>
+	<input type="text" name="mno" placeholder="Input mno....">
+	<button onclick="getMemo()">Memo 조회하기</button>
+	<div id="result_get"></div>
+
+	<hr>
+	<h2>메모 수정하기</h2>
+	<!-- 수정할때는 mno가 있어야 하니 input 추가해줌 -->
+	<input type="text" name="mno2" placeholder="Input mno....">
+	<br>
+	<input type="text" name="title2" placeholder="Input title....">
+	<br>
+	<input type="text" name="content2" placeholder="Input content....">
+	<br>
+	<input type="text" name="writer2" placeholder="Input writer....">
+	<br>
+	<button onclick="putMemo()">Memo 수정하기</button>
+	<div id="result_save"></div>
+
+
+	<hr>
+	<h2>메모 삭제하기</h2>
+	<input type="text" name="mno3" placeholder="Input mno....">
+	<button onclick="deleteMemo()">Memo 삭제하기</button>
+	<div id="result_delete"></div>
+
+	<script>
+		function postMemo() {
+			// 입력 양식에 적힌 데이터 가져오기
+			const title_ = $("input[name='title']").val();
+			const content_ = $("input[name='content']").val();
+			const writer_ = $("input[name='writer']").val();
+			// 가져온 입력데이터를 객체로 만들기 -->  JSON으로 변경하여 서버에 전송하기 위해서.
+			const memo = {
+				title : title_,
+				content : content_,
+				writer : writer_
+			};
+			// 객체를 JSON으로 변경하기
+			const sendData = JSON.stringify(memo);
+
+			$
+					.ajax({
+						url : '/memoapp/memo',
+						type : 'POST',
+						contentType : 'application/json',
+						data : sendData,
+						success : function(response) { // JSON형태로 RESPONSE가 넘어옴
+							const memoDto = response; // 이미 JSON 객체로 넘어옴, 파싱 불필요
+							// memoDto 객체의 속성을 텍스트로 표시
+							const displayText = `Title: ${memoDto.title}, Content: ${memoDto.content}, Writer: ${memoDto.writer}`;
+							$("#result_save").text(displayText);
+						},
+						error : function(jqXHR, textStatus, errorThrown) {
+							$("#result_save").text(
+									"Error: " + textStatus + " - "
+											+ errorThrown);
+						}
+					});
+		}
+		function getMemo() {
+			// 입력 양식에 적힌 데이터 가져오기
+			// DB에서 검색할 때 사용할 텍스트박스
+			const mno_ = $("input[name='mno']").val();
+
+			//get조회하면 바로 수정하기에 조회한 데이터 값 들어가도록 하는 코드 추가
+			//조회하면 resultget에 결과가 나오는데 그 데이터를 title2, content2, writer2로 옮기기
+			// 수정하기 위한 입력양식 식별하기 (아래에서 쓸려고 준비해둠)
+			const mno_2 = $("input[name='mno2']").val();
+			const title_ = $("input[name='title2']").val();
+			const content_ = $("input[name='content2']").val();
+			const writer_ = $("input[name='writer2']").val();
+
+			$
+					.ajax({
+						url : '/memoapp/memo',
+						type : 'GET',
+						data : {
+							mno : mno_
+						},
+						success : function(response) {
+							const obj = response;
+							$("input[name='mno2']").val(obj.mno);
+							$("input[name='title2']").val(obj.title);
+							$("input[name='content2']").val(obj.content);
+							$("input[name='writer2']").val(obj.writer);
+
+							const displayText = `Mno: ${obj.mno}, Title: ${obj.title}, Content: ${obj.content}, Writer: ${obj.writer}`;
+							$("#result_get").text(displayText);
+						},
+						error : function(jqXHR, textStatus, errorThrown) {
+							$("#result_get").text(
+									"Error: " + textStatus + " - "
+											+ errorThrown);
+						}
+					});
+		}
+
+		function putMemo() {
+
+			const mno_ = document.querySelector("input[name='mno2']"); // 기존 데이터가 수정되는거니까 식별하기위한 mno가 필요
+			const title_ = document.querySelector("input[name='title2']");
+			const content_ = document.querySelector("input[name='content2']");
+			const writer_ = document.querySelector("input[name='writer2']");
+			// 가져온 입력데이터를 객체로 만들기 -->  JSON으로 변경하여 서버에 전송하기 위해서.
+			const memo = { // memo 객체를 만들어서 input의 value를 집어넣는다.
+
+				mno : mno_.value,
+				title : title_.value,
+				content : content_.value,
+				writer : writer_.value
+
+			}
+			// 객체를 JSON으로 변경하기
+			const sendData = JSON.stringify(memo);
+
+			const xhttp = new XMLHttpRequest();
+			xhttp.onload = function() { // 서버에서 등록처리 후 결과 데이터를 보내주면 responseText로 받는다.
+
+				document.getElementById("result_put").innerHTML = this.responseText; // return된 자료가 여기로 온다.
+			}
+
+			xhttp.open("PUT", "/memoapp/memo"); // put메서드로 감
+			xhttp.setRequestHeader("Content-type", "application/json");
+			xhttp.send(sendData);
+
+		}
+
+		function deleteMemo() {
+
+			const mno = document.querySelector("input[name='mno3']");
+
+			const xhttp = new XMLHttpRequest();
+			xhttp.onload = function() { // 컨트롤러에서 객체타입이 리턴됨 -->  JSON형태로 데이터가 넘어왔다.
+				document.getElementById("result_delete").innerHTML = this.responseText; // 넘어온 responseText는 JSON 형태임
+			}
+			xhttp.open("DELETE", "/memoapp/memo/" + mno.value); // 파라미터가 아닌 PATH에 넣어서 보냄 (컨트롤러를 그렇게 작성해 두었으니까.. 맞춰서 여기도 path에 넣어줌)
+			xhttp.send();
+
+		}
+	</script>
+
+</body>
+</html>

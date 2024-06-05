@@ -1,0 +1,43 @@
+package com.green.restApiExPractice2.dto;
+
+import lombok.Data;
+
+public class MemoDto {
+
+	private Integer mno;
+	private String title;
+	private String content;
+	private String writer;
+	
+	public Integer getMno() {
+		return mno;
+	}
+	public void setMno(Integer mno) {
+		this.mno = mno;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	@Override
+	public String toString() {
+		return "MemoDto [mno=" + mno + ", title=" + title + ", content=" + content + ", writer=" + writer + "]";
+	}
+	
+	
+	
+}

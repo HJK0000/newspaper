@@ -1,0 +1,34 @@
+package com.green.jqueryPractice.controller;
+
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.green.jqueryPractice.dto.UserDto;
+import com.green.jqueryPractice.entity.User;
+import com.green.jqueryPractice.repository.UserRepository;
+
+@RestController
+@RequestMapping("/api")
+public class AjaxController {
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@PostMapping("/submitForm")
+	public User postUser(@RequestParam Map<String, String> formData) {
+		
+		formData user = new User();
+		user.setUsername(userDto.getUsername());
+		user.setPassword(userDto.getPassword());
+		
+		User result = userRepository.save(user);
+		
+		return result;
+	}
+}

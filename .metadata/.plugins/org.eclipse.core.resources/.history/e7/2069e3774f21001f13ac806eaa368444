@@ -1,0 +1,5 @@
+package com.example.restAPI.controller;
+
+public class PostController {
+
+}

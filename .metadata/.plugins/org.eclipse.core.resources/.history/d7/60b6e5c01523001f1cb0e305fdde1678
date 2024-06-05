@@ -1,0 +1,44 @@
+package com.green.newsProject.controller;
+
+import java.security.Timestamp;
+import java.time.LocalDateTime;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.green.newsProject.dto.NewsDto;
+import com.green.newsProject.entity.News;
+import com.green.newsProject.repository.UserRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+@RequestMapping("/reporter")
+public class ReporterController {
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@RequestMapping("/registArticleForm")
+	public String registArticleForm() {
+		
+		System.out.println("registArticleForm으로 들어옴................");
+		return "registArticleForm";
+	}
+	
+	@RequestMapping("/registArticle")
+	public String registArticle(NewsDto newsDto, HttpServletRequest request) {
+		
+		System.out.println("파라미털 받는 newsDto = " + newsDto);
+		
+		News news = new News();
+		news.setTitle(newsDto.getTitle());
+		news.setContent(newsDto.getContent());
+		LocalDateTime now = LocalDateTime.now();
+		news.setCreated_at(now);
+				
+	}
+
+}

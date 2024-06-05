@@ -1,0 +1,22 @@
+package com.example.restAPI.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/")
+public class MainController {
+	
+	@RequestMapping("/productRegist")
+	public String productRegist() {
+		
+		
+		return "productRegist";
+	}
+	
+	@RequestMapping("/memberRegist")
+	public String memberRegist() {
+		
+		return "memberRegist";
+	}
+}

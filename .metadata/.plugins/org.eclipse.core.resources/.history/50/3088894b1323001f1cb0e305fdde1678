@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<h1>기사 등록 페이지</h1>
+	<hr>
+	
+	<ul>
+		<li>제목</li>
+		<input type="text" name="title" placeholder="제목" /> 
+	</ul>
+	<ul>
+		<li>내용</li>
+		<textarea type="text" name="content"> </textarea>
+	</ul>
+	<ul>
+		
+	</ul>
+	<ul>
+		<li>이미지 내용</li>
+		<input type="text" name="img_content" placeholder="이미지 설명" />
+	</ul>
+</body>
+</html>

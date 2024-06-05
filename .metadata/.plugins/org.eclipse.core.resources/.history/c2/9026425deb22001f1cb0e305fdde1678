@@ -1,0 +1,33 @@
+package com.green.newsProject.entity;
+
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class User {
+	
+	@Id
+	private String username;
+	
+	private String password1;
+	private String password2;
+	private String name;
+	private String tel;
+	private String addr;
+	@Column(name = "timestamp", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+
+	출처: https://dev-elop.tistory.com/entry/JPA-Entity-CURRENTTIMESTAMP-생성법 [현직개발자:티스토리]
+	private LocalDateTime created_at;
+	private String role;
+	
+}

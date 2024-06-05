@@ -1,0 +1,68 @@
+package com.green.newsProject.controller;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.green.newsProject.dto.NewsDto;
+import com.green.newsProject.entity.News;
+import com.green.newsProject.entity.User;
+import com.green.newsProject.repository.UserRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
+@Controller
+@RequestMapping("/reporter")
+public class ReporterController {
+
+	@Autowired
+	private UserRepository userRepository;
+
+	@RequestMapping("/registArticleForm")
+	public String registArticleForm() {
+		
+		System.out.println("registArticleForm으로 들어옴................");
+		return "registArticleForm";
+	}
+	
+	@RequestMapping("/registArticle")
+	public String registArticle(NewsDto newsDto, HttpServletRequest request) {
+		
+		System.out.println("파라미털 받는 newsDto = " + newsDto);
+		
+		HttpSession session = request.getSession();
+		
+		String username = (String) session.getAttribute("id");
+		
+		Optional<User> userResult = userRepository.findById(username);
+		
+		User user = userResult.get();		
+		
+		
+		News news = new News();
+		news.setTitle(newsDto.getTitle());
+		news.setContent(newsDto.getContent());
+		news.setUser(user);
+		LocalDateTime now = LocalDateTime.now();
+		news.setCreated_at(now);
+		news.setModified_at(now);
+		news.setImg_content(newsDto.getImg_content());
+		String originName = newsDto.getFileName();
+		news.setOrigin_name(originName);
+		
+		// 원래 파일 이름
+		
+		log.info(originName);
+		
+		String newName = UUID.randomUUID().toString() + "_" + originName;
+		
+				
+	}
+
+}

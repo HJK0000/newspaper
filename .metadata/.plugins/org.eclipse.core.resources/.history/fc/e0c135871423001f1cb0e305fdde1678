@@ -1,0 +1,5 @@
+package com.green.newsProject.dto;
+
+public class NewsDto {
+
+}

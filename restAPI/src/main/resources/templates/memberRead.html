@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회원조회 페이지</title>
+</head>
+<body>
+	<h1>회원조회 페이지</h1>
+	<hr>
+	<form action="/api/v1/get-api/getMember" method="get">
+		<table border="1">
+			<tr>
+				<th>이름</th>
+				<td th:text="${member.name}"></td>
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td th:text="${member.email}"></td>
+			</tr>
+			<tr>
+				<th>주소</th>
+				<td th:text="${member.addr}"></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="수정하기"></td>
+			</tr>
+		</table>
+		
+	</form>
+</body>
+</html>

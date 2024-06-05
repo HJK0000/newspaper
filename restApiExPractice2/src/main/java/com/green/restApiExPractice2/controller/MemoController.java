@@ -1,0 +1,59 @@
+package com.green.restApiExPractice2.controller;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.green.restApiExPractice2.dto.MemoDto;
+import com.green.restApiExPractice2.entity.Memo;
+import com.green.restApiExPractice2.repository.MemoRepository;
+
+
+@RestController
+@RequestMapping("/memoapp")
+public class MemoController {
+
+	@Autowired
+	public MemoRepository memoRepository;
+
+//	@RequestMapping("/main")
+//	public String root() {
+//
+//		return "";
+//
+//	}
+
+	@GetMapping("/memo")
+	public Memo getMemo(@RequestParam("mno") Integer mno) {
+
+		System.out.println("getMemo....... mno : " + mno);
+
+		Optional<Memo> result = memoRepository.findById(mno);
+
+		Memo memo = result.get();
+
+		return memo;
+
+	}
+
+	@PostMapping("/memo")
+	public Memo postMemo(@RequestBody MemoDto memoDto) {
+
+		System.out.println("postMemo......... memoDto : " + memoDto);
+		
+		Memo memo = new Memo();
+		memo.setTitle(memoDto.getTitle());
+		memo.setContent(memoDto.getContent());
+		memo.setWriter(memoDto.getWriter());
+
+		Memo result = memoRepository.save(memo);
+	
+		return result;
+	}
+}

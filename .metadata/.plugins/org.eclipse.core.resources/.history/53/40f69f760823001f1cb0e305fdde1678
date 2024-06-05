@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>헤더</title>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		// 서버에서 전달된 로그인 상태 확인
+		var isLoggedIn = [ [ $(isLoggedIn) ] ]
+
+		var loggedOutLinks = document.getElementById('logged-out-links');
+		var loggedInLinks = document.getElementById('logged-in-links');
+
+		if (isLoggedIn) {
+			loggedOutLinks.style.display = 'none';
+			loggedInLinks.style.display = 'block';
+		} else {
+			loggedOutLinks.style.display = 'block';
+			loggedInLinks.style.display = 'none';
+		}
+	});
+</script>
+</head>
+<body>
+	<header>
+		<h1>그린일보</h1>
+		 <div id="logged-out-links" style="display: none;">
+		<a href="/registForm">회원가입</a> <a href="/loginForm">로그인</a> 
+		</div><a
+			href="#">기사 등록하기</a> <a href="#">승인/반려 조회</a> <a href="#">내가 쓴 기사
+			조회</a> <a href="/logout">로그아웃</a>
+
+	</header>
+</body>
+</html>

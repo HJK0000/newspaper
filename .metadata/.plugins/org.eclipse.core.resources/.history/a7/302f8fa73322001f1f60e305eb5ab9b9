@@ -1,0 +1,5 @@
+package com.green.jqueryPractice.repository;
+
+public interface UserRepository {
+
+}

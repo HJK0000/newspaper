@@ -1,0 +1,5 @@
+INDEX VERSION 1.134
+C:\dev2\restAPI\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3636294696.index
+\jqueryPractice\src\main\java
+C:\dev2\restAPI\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\873630402.index
+\newsProject\src\main\java

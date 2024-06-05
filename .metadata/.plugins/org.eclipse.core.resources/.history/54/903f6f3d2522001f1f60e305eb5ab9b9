@@ -1,0 +1,14 @@
+package com.green.jqueryPractice.entity;
+
+import jakarta.persistence.Entity;
+import lombok.Data;
+
+@Entity
+@Data
+public class Member {
+	
+	private Integer mno;
+	private String name;
+	private String hobby;
+	private String addr;
+}

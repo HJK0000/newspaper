@@ -1,0 +1,5 @@
+package com.green.newsProject.entity;
+
+public class Accept {
+
+}

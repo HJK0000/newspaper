@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>제이쿼리 ajax</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<div th:fragment="greeting">
+		<h1 th:text="${greet}">인사1</h1>
+	</div>
+	<div>[[${greet}]]</div> 
+
+	<h1>Ajax Example2</h1>
+	<hr>
+	<form id="myForm">
+		<input type="text" name="username" /> <input type="password"
+			name="password" />
+		<button type="submit">Submit</button>
+	</form>
+
+	<button id="btn">JSON 데이터 전송</button>
+
+
+
+	<script>
+
+	</script>
+</body>
+</html>

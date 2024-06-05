@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회원조회 및 수정 페이지</title>
+<script>
+    function getMember() {
+        const memberId = document.getElementById("memberId").value;
+        fetch(`/api/v1/getMember?id=${memberId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("name").value = data.name;
+                document.getElementById("email").value = data.email;
+                document.getElementById("addr").value = data.addr;
+                document.getElementById("memberForm").style.display = 'block';
+            });
+    }
+
+    function updateMember() {
+        const member = {
+            id: document.getElementById("memberId").value,
+            name: document.getElementById("name").value,
+            email: document.getElementById("email").value,
+            addr: document.getElementById("addr").value
+        };
+
+        fetch('/api/v1/updateMember', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(member)
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Member updated successfully');
+        });
+    }
+</script>
+</head>
+<body>
+    <h1>회원조회 및 수정 페이지</h1>
+    <hr>
+    <div>
+        <label for="memberId">회원 ID:</label>
+        <input type="text" id="memberId" name="memberId">
+        <button onclick="getMember()">조회하기</button>
+    </div>
+    <hr>
+    <form id="memberForm" style="display:none;">
+        <table border="1">
+            <tr>
+                <th>이름</th>
+                <td><input type="text" id="name" name="name"></td>
+            </tr>
+            <tr>
+                <th>이메일</th>
+                <td><input type="text" id="email" name="email"></td>
+            </tr>
+            <tr>
+                <th>주소</th>
+                <td><input type="text" id="addr" name="addr"></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><button type="button" onclick="updateMember()">수정하기</button></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

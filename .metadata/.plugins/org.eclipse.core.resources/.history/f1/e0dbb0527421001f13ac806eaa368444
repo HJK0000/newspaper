@@ -1,0 +1,38 @@
+package com.example.restAPI.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.restAPI.entity.Member;
+import com.example.restAPI.repository.IMemberRepository;
+
+@Controller
+@RequestMapping("/")
+public class MainController {
+
+	@Autowired
+	private IMemberRepository imemberRepository;
+	
+	@RequestMapping("/productRegist")
+	public String productRegist() {
+
+		return "productRegist";
+	}
+
+	@RequestMapping("/memberRegist")
+	public String memberRegist() {
+
+		return "memberRegist";
+	}
+
+	@GetMapping("/memberSave")
+	public String getMember(Member member, Model model) {
+		imemberRepository.save(member);
+		model.addAttribute("member", member);
+		return "memberRead"; // "productRead"는 Thymeleaf 템플릿 이름입니다.
+	}
+
+}

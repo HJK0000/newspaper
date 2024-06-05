@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div class="header">
+		<th:block th:include="/header"></th:block>
+	</div>
+	<a href="/reporter/registArticleForm">기사 등록하기</a>
+	<a th:href="@{/reporter/registArticleForm}">기사 등록하기(타임리프)</a>
+	<img src="img/기사 이미지1.jpg">
+	
+
+</body>
+</html>

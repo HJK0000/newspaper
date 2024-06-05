@@ -1,0 +1,24 @@
+package com.example.restAPI.repository;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.stereotype.Repository;
+
+import com.example.restAPI.dto.StudentDto;
+
+@Repository
+public class StudentRepository {
+
+	private static Map<Long, StudentDto> store = new HashMap<>();
+	private static long sequence = 0l;
+
+	public void save(Student student) {
+		student.setId(++sequence);
+		store.put(student.getId(), student);
+	}
+
+	public Optional<Student> findById(Long studentId) {
+		return Optional.ofNullable(store.get(studentId));
+	}
+}

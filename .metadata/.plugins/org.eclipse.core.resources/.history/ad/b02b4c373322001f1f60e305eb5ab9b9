@@ -1,0 +1,5 @@
+package com.green.jqueryPractice.dto;
+
+public class UserDto {
+
+}

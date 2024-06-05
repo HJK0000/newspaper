@@ -1,0 +1,5 @@
+package com.example.restAPI.entity;
+
+public class Product {
+
+}

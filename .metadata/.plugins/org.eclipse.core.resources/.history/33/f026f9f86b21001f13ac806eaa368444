@@ -1,0 +1,19 @@
+package com.example.restAPI.entity;
+
+import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "member")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+
+public class Member {
+
+	
+}

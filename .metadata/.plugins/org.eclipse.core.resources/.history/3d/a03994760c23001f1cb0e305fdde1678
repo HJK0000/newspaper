@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header>
+		<div th:if="${id == null}">
+			<h1>그린일보</h1>
+			<button>
+				<a th:href="@{/registForm}">회원가입</a>
+			</button>
+			<button>
+				<a th:href="@{/loginForm}">로그인</a>
+			</button>
+		</div>
+		<div th:if="${id != null and role == 'ROLE_MEMBER'}">
+			<h1>일반 회원 메인</h1>
+			<a href="#">내 주문목록</a>
+			<a href="#">장바구니 가기</a>
+			<button>
+				<a th:href="@{/member/logout}">로그아웃</a>
+			</button>
+		</div>
+		<div th:if="${id != null and role == 'ROLE_ADMIN'}">
+			<h1>관리자 메인</h1>
+			<a th:href="@{/admin/productRegistForm}">상품 등록</a>
+			<a href="#">재고 관리</a>
+			<button>
+				<a th:href="@{/admin/logout}">로그아웃</a>
+			</button>
+		</div>
+		<hr>
+	
+	</header>
+
+</body>
+</html>

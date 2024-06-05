@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js"
+	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<h1>회원 등록하기 page</h1>
+	<hr>
+
+	<input type="text" name="name" placeholder="Input name....">
+	<br>
+	<input type="text" name="hobby" placeholder="Input hobby....">
+	<br>
+	<input type="text" name="addr" placeholder="Input address....">
+	<br>
+	<input type="text" id= "email" name="email" placeholder="Input email...."><button type="submit" id="emailChk">이메일 중복검사</button>
+	<br>
+	<button type="submit" id="memberReg">회원정보 저장하기</button>
+	<div id="result_save"></div>
+
+	<h1>Ajax Example</h1>
+	<hr>
+	<form id="myForm">
+		<input type="text" name="username" /> <input type="password"
+			name="password" />
+		<button type="submit">Submit</button>
+	</form>
+
+	<button id="btn">JSON 데이터 전송</button>
+
+
+
+	<script  type="text/javascript">
+		$(document).ready(function() {
+			
+			$("#emailChk").click(function(){
+				
+				var email = $("#email").val();
+				
+				$.ajax({
+					
+					url : '/members/member',
+					type : 'GET',
+					data : email,
+					success : function(){
+						
+						
+						
+					}
+					
+					
+					
+				})
+				
+				
+				
+				
+			})
+			
+		 $("#memberReg").click(function() {
+
+		 const name_ = document.querySelector("input[name='name']");
+		 const hobby_ = document.querySelector("input[name='hobby']");
+		 const addr_ = document.querySelector("input[name='addr']");
+		 const email_ = document.querySelector("input[name='email']");
+		 
+		 const member = {
+
+		 name : name_.value,
+		 hobby : hobby_.value,
+		 addr : addr_.value,
+		 email : email_.value
+		 
+		 }
+		
+		 const sendData = JSON.stringify(member);
+		
+		 const xhttp = new XMLHttpRequest();
+		 xhttp.onload = function() { // 서버에서 등록처리 후 결과 데이터를 보내주면 responseText로 받는다.
+
+		 document.getElementById("result_save").innerHTML = this.responseText;
+		 }
+
+		 xhttp.open("POST", "/members/member");
+		 xhttp.setRequestHeader("Content-type", "application/json");
+		 xhttp.send(sendData);
+		 })
+
+		 })
+		 
+
+		$(document).ready(function() {
+			//폼 데이터 서버에 전송하고 응답받기
+			$('#myForm').on('submit', function(e) {
+				e.preventDefault(); // 폼의 기본 제출을 방지	
+
+				// 폼 데이터를 객체로 직렬화
+				var formData = $(this).serialize();
+
+				$.ajax({
+					url : '/api/submitForm', // 서버의 앤드포인트 URL
+					type : 'POST', // 요청 방식
+					data : formData, //  전송할 데이터
+					success : function(response) {
+						console.log('Success:', response);
+
+					},
+					error : function(xhr, status, error) {
+						console.log('XMLHttpRequest 객체 : ', xhr);
+						console.log('Status : ', status);
+						console.log('Error:', error);
+
+						if (xhr.status === 404) {
+
+							console.log("리소스가 없어요~~(주소를 똑바로 쓰란 말이죠)");
+
+						} else if (xhr.status === 500) {
+
+							console.log("뭔가 문제가 있어요... 메시지를 확인하세요.");
+						} else {
+							console.log("다른 알려지지않은 문제가 있어요.");
+						}
+
+					}
+				});
+
+			});
+
+			$('#btn').on('click', function(e) {
+
+				const jsonData = {
+					username : "testUser",
+					password : "1234"
+
+				};
+
+				$.ajax({
+
+					url : "/api/submitJson", // 서버의 앤드포인트 URL
+					type : "POST", // Http 메소드 타입
+					contentType : "application/json", // 전송할 데이터의 형식 - 여기서는 json
+					data : JSON.stringify(jsonData), // 전송할 데이터 - json 문자열로 바꿔서 보낸다.
+					success : function(response) {
+						console.log(response);
+					}, // 성공적으로 완료되었을 때 서버가 보내온 메시지 처리
+					error : function() {
+						console.log("실패했어요.");
+
+					}// 실패했을 때 실행될 코드
+				});
+
+			});
+		});
+	</script>
+</body>
+</html>

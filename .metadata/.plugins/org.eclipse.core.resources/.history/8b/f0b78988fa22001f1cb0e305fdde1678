@@ -1,0 +1,45 @@
+package com.green.newsProject.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.green.newsProject.repository.UserRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+@Controller
+//@RequestMapping("/")
+public class MyController {
+
+	@Autowired
+	private UserRepository userRepository;
+	
+	@RequestMapping("/")
+	public String root() {
+		
+		
+		return "index";
+	}
+	
+
+	@RequestMapping("/regist")
+	public String regist(Model model, HttpServletRequest request) {
+		
+		
+		String username = request.getParameter("username");
+		String password1 = request.getParameter("password1");
+		String password2 = request.getParameter("password2");
+		String name = request.getParameter("name");
+		String tel = request.getParameter("tel");
+		String addr = request.getParameter("addr");
+		String role = request.getParameter("role");
+		
+		
+		
+		
+		
+	}
+	
+}

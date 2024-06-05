@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div class="header">
+		<th:block th:include="/header"></th:block>
+	</div>
+	
+	<img src="img/기사 이미지1.jpg">
+	
+
+</body>
+</html>

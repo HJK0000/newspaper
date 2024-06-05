@@ -1,0 +1,39 @@
+package com.example.restAPI.controller;
+
+import java.util.Map;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1/post-api")
+public class PostController {
+	
+	// http://localhost:8092/api/v1/post-api/domain
+	@PostMapping("/domain") // 약식으로 쓴 것
+	//@RequestMapping(value = "/domain", method=RequestMethod.POST) // 정식으로 쓴 것 (너무 길어서 약식으로 씀)
+	public String postExample() {
+		
+		return "Hello Post Api!";
+		
+	}	
+	
+	@PostMapping("/member")
+	public String postMember(@RequestBody Map<String, Object> postData) {
+		
+		StringBuilder sb = new StringBuilder();
+		postData.entrySet().forEach(map -> {
+			
+			sb.append(map.getKey() + " : " + map.getValue() + "\n");
+			
+			
+			
+		});
+		
+		return sb.toString();
+		
+	}
+}

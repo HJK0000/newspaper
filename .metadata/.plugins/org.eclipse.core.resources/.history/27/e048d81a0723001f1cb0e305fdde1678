@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>헤더</title>
+</head>
+<body>
+	<header>
+		<h1>그린일보</h1>
+			<div th:if="${!id}">
+			<a href="/registForm">회원가입</a>
+			<a href="/loginForm">로그인</a>
+			</div>
+			<div th:if="${id}">
+			<a href="#">기사 등록하기</a>
+			<a href="#">승인/반려 조회</a>
+			<a href="#">내가 쓴 기사 조회</a>
+			<a href="/logout">로그아웃</a>
+			
+			</div>
+	</header>
+</body>
+</html>

@@ -1,0 +1,5 @@
+package com.green.jqueryPractice.entity;
+
+public class Member {
+
+}

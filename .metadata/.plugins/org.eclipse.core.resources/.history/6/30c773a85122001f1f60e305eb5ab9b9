@@ -1,0 +1,11 @@
+package com.green.jqueryPractice.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.green.jqueryPractice.entity.Member;
+
+public interface MemberRepository extends JpaRepository<Member, Integer>{
+
+	@Query(value = "SELECT COUNT(email) FROM member WHERE email = :email", nativeQuery = true)
+	int findByEmail(String email);
+}

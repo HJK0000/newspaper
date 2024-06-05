@@ -1,0 +1,8 @@
+package com.example.restAPI.service;
+
+import org.springframework.stereotype.Service;
+
+public class StudentService {
+
+	void save(Student studnet);
+}
